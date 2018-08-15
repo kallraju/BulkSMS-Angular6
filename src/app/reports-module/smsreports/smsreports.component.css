@@ -1,0 +1,13 @@
+.example-card {
+    max-width: 1000px;
+  }
+  
+  .card-title{ 
+    font-size:2em; 
+  }
+
+  .example-container > * {
+    width: 100%;
+  }
+  
+  

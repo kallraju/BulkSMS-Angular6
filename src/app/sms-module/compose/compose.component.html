@@ -1,0 +1,86 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <span class="card-title">Compose Message</span>
+    
+  </mat-card-header>
+  
+  <mat-card-content>
+      <form  (ngSubmit)="onSubmit(composeForm.value)" [formGroup]="composeForm">
+    <div class="example-container">
+        
+        <mat-form-field>
+            <mat-select formControlName = "Rtype" placeholder="Route Type">
+              <mat-option value="TPP">Promostional</mat-option>
+              <mat-option value="TPT">Transactional</mat-option>
+              <mat-option value="TPPS">Promo-SenderId</mat-option>
+            </mat-select>
+            
+          </mat-form-field>
+          <mat-error *ngIf="composeForm.get('Rtype').hasError('required') && (composeForm.get('Rtype').dirty || composeForm.get('Rtype').touched)">
+              <span>Select RouteType</span>
+          </mat-error>
+        <mat-form-field>
+        <mat-select formControlName = "senderid" placeholder="Sender Name">
+          <mat-option value="">Select Sender Name</mat-option>
+        <mat-option *ngFor="let sid of senderdata | async" value= {{sid.sender_name}}>{{sid.sender_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="composeForm.get('senderid').hasError('required') && (composeForm.get('senderid').dirty || composeForm.get('senderid').touched)">
+            <span>Required</span>
+        </mat-error>
+    <mat-radio-group>
+  <mat-radio-button  (click)="number()" > Number/Numbers</mat-radio-button>&nbsp;
+  <mat-radio-button  (click)="file()" value=""> File Upload</mat-radio-button>
+</mat-radio-group>
+<div class="example-mno" *ngIf="mpbiletextarea">
+      <mat-form-field>
+        <textarea rows="4" formControlName = "mno"  cols="40" matInput placeholder="Mobile Numbers" [(ngModel)]="mnodata" appNumberOnly="true" ></textarea>
+      </mat-form-field>
+      <mat-card-actions class="b-btn">
+          <a mat-button (click)="clear(mnodata.value)" color="primary">Clear List</a>
+          <a mat-button (click)="unique(mnodata.value)" color="primary">Unique Nos </a>
+          <a mat-button (click)="count(mnodata.value)" color="primary">Count Nos</a>
+          </mat-card-actions>
+          <mat-error *ngIf="composeForm.get('mno').hasError('required') && (composeForm.get('mno').dirty || composeForm.get('mno').touched)">
+            <span>Required</span>
+        </mat-error>
+  </div>
+      
+      <div class="example-file" *ngIf="fileup">
+        <input type="file"  formControlName = "FU"  (change)="onfileselected($event)"  multiple="multiple"/>
+      </div>
+      <mat-form-field>
+        <mat-select (selectionChange)="getSaveMsgID($event)"  placeholder="Saved SMS">
+            <mat-option value="">Select Saved Message</mat-option>
+          <mat-option *ngFor="let msg of savedmsg" value={{msg.mid}}>{{msg.mname}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select (selectionChange)="gettemID($event)"  placeholder="Transactional Templates">
+            <mat-option *ngFor="let temp of tempdata" value={{temp.tid}}>{{temp.Template_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea rows="4" cols="40"  matInput placeholder="Message" formControlName = "msg" [(ngModel)]="msg"></textarea>
+          </mat-form-field>
+          <mat-error *ngIf="composeForm.get('msg').hasError('required') && (composeForm.get('msg').dirty || composeForm.get('msg').touched)">
+              <span>Required</span>
+          </mat-error>
+      <mat-form-field>
+        <input matInput formControlName = "cap" placeholder="Campaign Name">
+      </mat-form-field>
+    </div>
+    <mat-card-actions class="a-btn">
+        <button mat-raised-button type="submit" [disabled] = "!composeForm.valid" color="primary">Send</button>
+        <!--<button mat-raised-button type="submit" color="primary">Send</button>-->
+        <button mat-raised-button color="warn">CANCEL</button>
+    </mat-card-actions>
+    <mat-progress-bar *ngIf="visible" mode="indeterminate"></mat-progress-bar>
+  </form>
+  
+  </mat-card-content>
+  
+</mat-card>
+
+<!--p>Form value {{ composeForm.value | json }} </p-->

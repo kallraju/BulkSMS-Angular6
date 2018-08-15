@@ -1,0 +1,32 @@
+<div class="signin-content">
+    <mat-card>
+      <mat-card-content>
+        <form  (ngSubmit)="onSubmit(signupForm.value)" [formGroup]="signupForm">
+          <h2>Login</h2>
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="User" formControlName = "name">
+            
+          </mat-form-field>
+          <mat-error *ngIf="signupForm.get('name').hasError('required') && (signupForm.get('name').dirty || signupForm.get('name').touched)">
+              <span>Enter user name</span>
+          </mat-error>
+         
+          <mat-form-field class="full-width-input">
+            <input matInput type="password" placeholder="Password" formControlName = "psw" required>
+            
+          </mat-form-field>
+          <mat-error *ngIf="signupForm.get('psw').hasError('required') && (signupForm.get('psw').dirty || signupForm.get('psw').touched)">
+             <span> Enter password</span>
+          </mat-error>
+          <br>
+          <button mat-raised-button [disabled] = "!signupForm.valid" color="primary">Login</button>
+          <button mat-raised-button color="warn">Warn</button>
+         
+        </form>
+        <mat-progress-bar *ngIf="visible" mode="indeterminate"></mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!--<p>Form value {{ signupForm.value | json }} </p>-->
+
+  

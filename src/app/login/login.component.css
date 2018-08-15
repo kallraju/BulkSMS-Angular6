@@ -1,0 +1,16 @@
+mat-card {
+  max-width:350px;
+  margin: 10em auto;
+  text-align: center;
+}
+.signin-content {
+  padding: 60px 1rem;
+
+}
+.full-width-input {
+  width: 100%;
+  font-size:1.5em;
+}
+span { 
+  font-size: 1.2em; 
+}

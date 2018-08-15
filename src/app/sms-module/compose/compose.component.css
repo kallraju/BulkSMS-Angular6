@@ -1,0 +1,39 @@
+.example-card {
+    max-width: 1000px;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  
+  .a-btn {
+    
+    color: white;
+    padding: 25px 50px;
+    
+    border: none;
+    cursor: pointer;
+    
+  }
+
+  .example-container {
+    width: 100%;
+    font-size:1.5em;
+  }
+  .card-title{ 
+    font-size:2em; 
+  }
+
+  .example-mno > * {
+    width: 100%;
+  }
+  
+
+  .example-file > * {
+    width: 100%;
+  }
